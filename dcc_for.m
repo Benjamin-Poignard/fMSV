@@ -1,12 +1,19 @@
 function Hdcc = dcc_for(returns_in,returns_out)
 
-[~,N]=size(returns_in);
+% Inputs:
+% - returns_in: T_in x N matrix of observations, with T_in the in-sample
+% length and N the number of variables
+% - returns_out: T_out x N matrix of observations, with T_out the
+% out-of-sample length and N the number of variables
 
-%%%%%%%%%%%%%%%% Estimation of the GARCH based competitor %%%%%%%%%%%%%%%%%
+% Output:
+% - Hdcc: N x N x T_out variance-covariance process (out-of-sample)
 
 % Note that all the MGARCH models are estimated/generated from the functions
 % that where downloaded from the MFE toolbox: please see
 % https://www.kevinsheppard.com/code/matlab/mfe-toolbox/
+[~,N]=size(returns_in);
+
 
 % scalar DCC
 if (N<101)

@@ -3,7 +3,7 @@ function [Hf_fmsv,m_opt] = fmsv_for(X_in,X_out,p,m,method,fscore)
 % Inputs
 % - X_in: T_in x N matrix of observations, with T_in the in-sample length
 % and N the number of variables
-% - X_out: T_in x N matrix of observations, with T_out the out-of-sample
+% - X_out: T_out x N matrix of observations, with T_out the out-of-sample
 % length and N the number of variables
 % - p: number of lags at at the first step MSV estimation (VAR(p))
 % - m: number of factors
