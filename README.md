@@ -2,9 +2,9 @@
 
 Matlab implementation of factor Multivariate Stochastic Volatility (fMSV) model based on the paper:
 
-"TBA" by Benjamin Poignard and Manabu Asai.
+*Factor multivariate stochastic volatility models of high dimension* by Benjamin Poignard and Manabu Asai.
 
-Link: TBA
+Link: https://arxiv.org/abs/2406.19033
 
 # Overview
 
