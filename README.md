@@ -34,8 +34,8 @@ The Parallel Computing Toolbox is highly recommended to run the code to speed up
 
 # Description of the code
 
-The main function to conduct the fMSV model is *fmsv_for.m* and relies on the factor model estimation based on the Sparse Approximate Factor (SAF) model of Bai and Liao (2016) and the Sparse Factor Loading (SFL) model of Poignard and Terada (2016).
-The repository for SAF and SFL estimation can be accessed here: https://github.com/Benjamin-Poignard/sparse-factor-models
+The main function to conduct the fMSV model is *fmsv_for.m* and relies on the factor model estimation based on the Principal Orthogonal complEment Thresholding (POET) model of Fan, Liao and Mincheva (2013) and the Sparse Factor Model (SFM) model of Poignard and Terada (2025).
+The repository for SFM estimation can be accessed here: https://github.com/Benjamin-Poignard/sparse-factor-models
 
 
 The codes for estimating the scalar DCC model and scalar BEKK (with composited likelihood method) are provided in the replication package: the replicator should refer to dcc_mvgarch_for.m. To be precise, both full likelihood and composite-likelihood methods are implemented in the second-step objective function. The latter method is based on contiguous overlapping pairs, which builds upon C. Pakel, N. Shephard, K. Sheppard and R.F. Engle (2021) and should be used when the dimension is large (i.e., larger than 200, 300, 400). The DCC-GARCH code builds upon the MFE toolbox of K. Sheppard, https://www.kevinsheppard.com/code/matlab/mfe-toolbox/
