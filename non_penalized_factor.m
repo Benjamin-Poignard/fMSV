@@ -1,12 +1,12 @@
-function [Lambda,Psi] = non_penalized_factor(X,m,loss)
+function [Lambda,Psi] = non_penalized_factor(X,m)
 
 % Inputs:
-%         - X: n x p vector of observations
+%         - S: sample variance-covariance matrix
 %         - m: number of factors
-%         - loss: 'Gaussian' or 'LS' ('LS' stands for least squares)
 % Outputs:
-%         - Lambda: factor loading matrix satisfying
-%         Lambda' x inv(Psi) x Lambda diagonal
+%         - Lambda: factor loading matrix satisfying IC5 condition of Bai
+%         and Li (2012), 'Statistical analysis of factor models of high
+%         dimension', the Annals of Statistics, 40(1): 436-465
 %         - Psi: variance-covariance matrix (diagonal) of the idiosyncratic
 %         errors
 
@@ -24,9 +24,8 @@ SuPCA=uhat*uhat'/T;
 LPCA=LamPCA;
 SigPCA=SuPCA;
 
-%%%%%%%%%%%% Calculate SFM (diagonal Max Likelihood of Bai and Li 2012)
-%%%%%%%%%%%% using EM algorithm
-%%%%%%%%%%%% SFM estimate uses PCA as initial value
+%%%%%%%%%%%% Calculate SFM (diagonal Max Likelihood of Bai and Li 2012) as initial value
+%%%%%%%%%% SFM estimate uses PCA as initial value
 Sy=X'*X/T;
 kk=1;
 Lambda0=ones(N,m)*10;
@@ -35,7 +34,7 @@ Su=SigPCA;
 Psi=diag(diag(Su));
 Psi_old=eye(N)*100;
 
-while likelihoodlambda(Sy,Lambda0,Psi_old,loss)-likelihoodlambda(Sy,Lambda,Psi,loss)>10^(-7)&&kk<4000
+while likelihoodlambda(Sy,Lambda0,Psi_old)-likelihoodlambda(Sy,Lambda,Psi)>10^(-7)&&kk<4000
     Psi_old=Psi;
     Lambda0=Lambda;
     A=inv(Lambda0*Lambda0'+Psi);
@@ -46,10 +45,4 @@ while likelihoodlambda(Sy,Lambda0,Psi_old,loss)-likelihoodlambda(Sy,Lambda,Psi,l
     Psi=diag(diag(M));
     kk=kk+1 ;
 end
-
-switch loss
-    case 'Gaussian'
-        fprintf('First step estimation with Gaussian loss completed \n')
-    case 'LS'
-        fprintf('First step estimation with LS loss completed \n')
-end
+fprintf('First step estimation with Gaussian loss completed \n')

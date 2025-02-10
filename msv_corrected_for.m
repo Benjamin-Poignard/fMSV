@@ -1,12 +1,9 @@
-function Hf = msv_corrected_for(data_in,data_out,Pen,p)
+function Hf = msv_corrected_for(data_in,data_out,p)
 
 % - data_in: T_in x N vector of in-sample observations, with T_in the
 %   sample size of the in-sample period
 % - data_in: T_out x N vector of out-sample observations, with T_out the
 %   sample size of the out-of-sample period
-% - Pen: penalisation specification
-%   ==> 'pen': adaptive LASSO
-%   ==> 'nonpen': non-penalized
 % - p: number of lags for the first step
 
 % A cross-validation procedure is performed to select the optimal tuning
@@ -23,25 +20,10 @@ z = (log(data_out.^2+(1e-04)) -iC*ones(T_out,N)./(data_out.^2+iC));
 data_out = exp(0.5*z);
 % Estimation of the MSV model
 % grid: user-specified grid of values for cross-validation around sqrt(log(p*N^2)/T_in)
-grid = (0.01:0.1:10); lambda = grid*sqrt(log(p*N^2)/T_in);
+grid = (0.001:0.05:30); lambda = grid*sqrt(log(p*N^2)/T_in);
 
-switch Pen
-    
-    case 'pen'
-        
-        % Adaptive LASSO penalised MSV
-        [~,B,Sig_zeta,Sig_alpha,Gamma] = SV_process_estimate_corrected(data_in,p,'pen',lambda);
-        % Generate the out-of-sample forecasts of the penalized MSV
-        H_msv_ols_alasso = generate_SV_process_corrected(data_out,p,B,Sig_zeta,Sig_alpha,Gamma);
-        Hf = H_msv_ols_alasso;
-        
-    case 'nonpen'
-        
-        % Non-penalised MSV
-        lambda = 0;
-        [~,B,Sig_zeta,Sig_alpha,Gamma] = SV_process_estimate_corrected(data_in,p,'nonpen',lambda);
-        % Generate the out-of-sample forecasts of the non-penalised MSV
-        H_msv_ols_nonpen = generate_SV_process_corrected(data_out,p,B,Sig_zeta,Sig_alpha,Gamma);
-        Hf = H_msv_ols_nonpen;
-        
-end
+% Adaptive LASSO penalised MSV
+[~,B,Sig_zeta,Sig_alpha,Gamma] = SV_process_estimate_corrected(data_in,p,lambda);
+% Generate the out-of-sample forecasts of the penalized MSV
+H_msv_ols_alasso = generate_SV_process_corrected(data_out,p,B,Sig_zeta,Sig_alpha,Gamma);
+Hf = H_msv_ols_alasso;

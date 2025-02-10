@@ -1,4 +1,4 @@
-function [b,B_hat,Sig_zeta,Sig_alpha,Gamma] = SV_process_estimate_corrected(data,p,method,lambda)
+function [b,B_hat,Sig_zeta,Sig_alpha,Gamma] = SV_process_estimate_corrected(data,p,lambda)
 
 % This code estimates the MSV parameters only
 % Use generate_SV_process.m to generate the MSV based variance covariance
@@ -7,10 +7,8 @@ function [b,B_hat,Sig_zeta,Sig_alpha,Gamma] = SV_process_estimate_corrected(data
 % Inputs:
 %        - data: T x N vector of observations
 %        - p: number of lags for the first step
-%        - method: penalisation method: adaptive LASSO
 %        - lambda: penalisation parameter
-
-% outputs:
+% Outputs:
 %        - b: first step estimator
 %        - B_hat: second step estimator
 %        - Sig_zeta and Sig_alpha: please refers to the paper for the
@@ -30,7 +28,7 @@ x = log(data.^2)';
 
 %%% Equation by equation penalisation: this will be useful when considering
 %%% large N
-%%% Penalisation is performed for the lasso, adaptive lasso, scad, mcp
+%%% Penalisation is performed for the adaptive lasso
 
 % creation of the vector of covariate
 X = [];
@@ -44,19 +42,16 @@ end
 YY = x(:,p+1:end); y = x';
 
 XX = [ones(T-p,1),X']; b = zeros(N,1+p*N);
-y = y - ones(length(y),1)*mean(y); 
+y = y - ones(length(y),1)*mean(y);
 
 % equation-by-equation penalized estimation procedure
 for ii = 1:N
-    switch method
-        case 'pen'
-            [b_alasso,~] = penalized_var(y(p+1:end,ii),XX,lambda);
-            b(ii,:) = b_alasso';
-        case 'nonpen'
-            % non-penalized model: simple OLS
-            b_np = ((XX'*XX)\(XX'*y(p+1:end,ii)))';
-            b(ii,:) = b_np;
-    end
+    
+    [b_alasso,~] = penalized_var(y(p+1:end,ii),XX,lambda);
+    b(ii,:) = b_alasso';
+    % non-penalized model: simple OLS
+    b_np = ((XX'*XX)\(XX'*y(p+1:end,ii)))';
+    b(ii,:) = b_np;
 end
 
 % B corresponds to the estimated sparse Psi matrix in step 1
