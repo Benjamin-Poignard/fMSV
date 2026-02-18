@@ -27,12 +27,11 @@ The Matlab code was run on a Mac-OS Apple M1 Ultra with 20 cores and 128 GB Memo
 
 The following toolboxes should be installed:
 
-- cvx: https://github.com/cvxr/CVX
+- cvx (__Installation of CVX is necessary__): https://github.com/cvxr/CVX
 - Statistics and Machine Learning Toolbox, Version 12.3.
 - Parallel Computing Toolbox, Version 7.6.
 
-The Parallel Computing Toolbox is highly recommended to run the code to speed up the cross-validation procedure employed to select the optimal tuning parameter. 
-__Installation of CVX is required__.
+The Parallel Computing Toolbox is highly recommended to run the code to speed up the cross-validation procedure employed to select the optimal tuning parameter.
 
 # Description of the code
 
