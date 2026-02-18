@@ -32,7 +32,7 @@ The following toolboxes should be installed:
 - Parallel Computing Toolbox, Version 7.6.
 
 The Parallel Computing Toolbox is highly recommended to run the code to speed up the cross-validation procedure employed to select the optimal tuning parameter. 
-_Installation of CVX is required_.
+__Installation of CVX is required__.
 
 # Description of the code
 
