@@ -35,7 +35,7 @@ The Parallel Computing Toolbox is highly recommended to run the code to speed up
 
 # Description of the code
 
-The main function to conduct the fMSV model is *fmsv_for.m* and relies on the factor model QML estimation of Bai and Li (2012), *Statistical analysis of factor models of high dimension (*The Annals of Statistics*)
+The main function to conduct the fMSV model is *fmsv_for.m* and relies on the factor model QML estimation of Bai and Li (2012), *Statistical analysis of factor models of high dimension (The Annals of Statistics)*
 
 The codes for estimating the scalar DCC model and scalar BEKK (with composited likelihood method) are provided in the replication package: the replicator should refer to dcc_mvgarch_for.m. To be precise, both full likelihood and composite-likelihood methods are implemented in the second-step objective function. The latter method is based on contiguous overlapping pairs, which builds upon C. Pakel, N. Shephard, K. Sheppard and R.F. Engle (2021) and should be used when the dimension is large (i.e., larger than 200, 300, 400). The DCC-GARCH code builds upon the MFE toolbox of K. Sheppard, https://www.kevinsheppard.com/code/matlab/mfe-toolbox/
 
