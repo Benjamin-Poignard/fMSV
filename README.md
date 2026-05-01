@@ -10,8 +10,8 @@ Link: https://arxiv.org/abs/2406.19033
 
 The code in this replication includes:
 
-- The different DGP processes considered in the simulated experiments: the replicator should execute program *simulations.m*.
-- The real data experiment for the MSCI and S&P 100 portfolios: the replicator should execute program *main_real_data.m*.
+- The different DGP processes considered in the simulated experiments: the replicator should execute program *runcode_simu.m*.
+- The real data experiment for the MSCI and S&P 100 portfolios: the replicator should execute program *runcode_real_data.m*.
 
 # Data availability
 
