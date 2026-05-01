@@ -22,8 +22,6 @@ function H = generate_SV_process_corrected(data,p,B_hat,Sig_zeta,Sig_alpha,Gamma
 iC = 1e-4; v = mean(data.^2);
 x = log(data.^2+ iC*v)' - (iC*(ones(T,1)*v)./(data.^2+ iC*v))';
 
-%%%%%%%%%%%%%%%%%%%%%% First step: penalisation %%%%%%%%%%%%%%%%%%%%%%
-
 c_star = B_hat(:,1); B_hat(:,1) = [];
 Phi_sec = B_hat(:,1:N); B_hat(:,1:N) = [];
 
@@ -31,7 +29,9 @@ Phi_sec = B_hat(:,1:N); B_hat(:,1:N) = [];
 % c_hat = inv(eye(N)-Phi_sec)*c_star;
 c_hat = (eye(N)-Phi_sec)\c_star;
 
-%%%%%%%%%%%%%%%%%%%%%% Fourth step: MMSLE %%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% Fourth step: MMSLE %%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 c_vec = kron(ones(T,1),c_hat); % size of the vector: TN
 

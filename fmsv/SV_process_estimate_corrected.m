@@ -23,7 +23,9 @@ function [b,B_hat,Sig_zeta,Sig_alpha,Gamma] = SV_process_estimate_corrected(data
 iC = 1e-4; v = mean(data.^2);
 x = log(data.^2+ iC*v)' - (iC*(ones(T,1)*v)./(data.^2+ iC*v))';
 
-%%%%%%%%%%%%%%%%%%%%%%%%% First step: penalisation %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%% First step: penalization %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%% Equation by equation penalisation
 %%% Penalisation is performed for the adaptive lasso
